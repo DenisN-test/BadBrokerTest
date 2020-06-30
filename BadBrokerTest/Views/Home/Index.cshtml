@@ -1,0 +1,26 @@
+﻿@using BadBrokerTest.Models
+@model InputModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+<table>
+    <tr>
+        <td>@Html.LabelFor(m => m.StartDate)</td>
+        <td>@Html.EditorFor(m => m.StartDate) @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.EndDate)</td>
+        <td>@Html.EditorFor(m => m.EndDate, "{0:dd.MM.yyyy}") @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(m => m.MoneyAmount)</td>
+        <td>@Html.EditorFor(m => m.MoneyAmount) @Html.ValidationMessageFor(model => model.MoneyAmount, "", new { @class = "text-danger" })</td>
+    </tr>
+</table>
+
+<input class="button" type="submit" value="Submit">
+}

@@ -1,0 +1,45 @@
+﻿@using BadBrokerTest.Models.ResultModels
+@model ResultModel
+
+@Html.ActionLink("Back", "Index", "Home")
+<br />
+
+@if (Model?.Currencies != null && Model.Currencies.Any()) {
+
+    var max = Model.Currencies.Max(c => c.Rows.Max(r => r.Profit));
+
+    foreach (var item in Model.Currencies) {
+        <br />
+
+        if (item?.Days != null && item.Days.Any()) {
+            <table class="table">
+                <tr>
+                    <th>Date</th>
+                    <th>@item.CurrenciesExchange</th>
+                </tr>
+                @foreach (var day in item.Days) {
+                    <tr>
+                        <td>@day.Date</td>
+                        <td>@day.Exchange</td>
+                    </tr>
+                }
+            </table>
+        }
+
+        if (item?.Rows != null && item.Rows.Any()) {
+            <table>
+                @foreach (var row in item.Rows) {
+                    <tr>
+                        <td @if (row.Profit == max) { @: style="color:red" ;
+                            }>
+                            @row.Detalization
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    }
+}
+
+<br />
+@Html.ActionLink("Back", "Index", "Home")
